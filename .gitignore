@@ -7,3 +7,7 @@
 
 # sql files
 *.sql
+
+# bin files
+./web/asdf/build
+./applet/Yestar/bin
