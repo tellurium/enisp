@@ -6,7 +6,7 @@
 <%
     String driverName="com.mysql.jdbc.Driver";
     String userName="root";
-    String userPasswd="123456";
+    String userPasswd="987987";
 
     String dbName="enispdb";
     String tableName="userinfo";    
