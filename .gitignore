@@ -9,5 +9,5 @@
 *.sql
 
 # bin files
-./web/asdf/build
-./applet/Yestar/bin
+/bin
+/build
