@@ -1,0 +1,34 @@
+<project name="QrReader Server" basedir="./" default="all">
+    <path id="class.path">
+        <fileset dir="WebContent/libs">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <!-- Check timestamp on files -->
+    <target name="prepare">
+        <tstamp/>
+    </target>
+
+    <!-- Normal build of application -->
+    <target name="compile" depends="prepare">
+        <javac srcdir="src" destdir="WebContent/WEB-INF/classes">
+            <classpath refid="class.path"/>
+        </javac>
+    </target>
+
+
+    <!-- Remove classes directory for clean build -->
+    <target name="clean"
+        description="Prepare for clean build">
+        <delete dir="WebContent/WEB-INF/classes"/>
+        <mkdir  dir="WebContent/WEB-INF/classes"/>
+    </target>
+
+    <!-- Build entire project -->
+    <target name="project" depends="clean,prepare,compile"/>
+
+    <!-- Build project and create distribution-->
+    <target name="all" depends="project"/>
+
+</project>

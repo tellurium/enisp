@@ -28,7 +28,7 @@ public class NodeCalculationPanel extends JPanel implements ActionListener {
     public JLabel credundancy = new JLabel();
     public JLabel ceffective_size = new JLabel();
     
-    public JComboBox<Integer> nodeList;
+    public JComboBox nodeList;
     public JLabel accLabel;
     public JPanel accPanel;
     public NodeComboBoxRenderer nodeComboBoxRenderer;
@@ -76,7 +76,7 @@ public class NodeCalculationPanel extends JPanel implements ActionListener {
 	    	intArray[i] = new Integer(i);
 	    }
 	    
-	    nodeList = new JComboBox<Integer>(intArray);
+	    nodeList = new JComboBox(intArray);
 	    nodeList.setRenderer(nodeComboBoxRenderer);
 	    nodeList.addActionListener(this);
 	    nodeList.setMaximumRowCount(15);

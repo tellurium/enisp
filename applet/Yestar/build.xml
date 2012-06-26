@@ -1,0 +1,40 @@
+<project name="QrReader Server" basedir="./" default="all">
+    <path id="class.path">
+        <fileset dir="libs">
+            <include name="*.jar"/>
+        </fileset>
+        <pathelement location="classes/" />
+    </path>
+
+    <!-- Check timestamp on files -->
+    <target name="prepare">
+        <tstamp/>
+    </target>
+
+    <!-- Normal build of application -->
+    <target name="compile" depends="prepare">
+        <javac srcdir="src" destdir="classes">
+            <classpath refid="class.path"/>
+        </javac>
+    </target>
+
+
+    <!-- Remove classes directory for clean build -->
+    <target name="clean"
+        description="Prepare for clean build">
+        <delete dir="classes"/>
+        <mkdir  dir="classes"/>
+    </target>
+
+    <!-- Build entire project -->
+    <target name="project" depends="clean,prepare,compile"/>
+
+    <!-- Build project and create distribution-->
+    <target name="all" depends="project"/>
+
+    <target name="run">
+        <java classname="cn.yestar.YestarApplication" fork="yes">
+            <classpath refid="class.path"/>
+        </java>
+    </target>
+</project>
