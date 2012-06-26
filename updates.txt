@@ -1,4 +1,30 @@
 # 2012-06-27
+1.新的对象关系映射应该具有的功能包括:
+    1.Insert(增):
+        1.向数据库插入对象时,需要提交除id列以外的所有字段信息
+    2.Delete(删)
+        1.根据对象的id来进行删除
+    3.Update(改)
+        1.根据对象的id来进行更新
+    4.Select(查)
+        1.根据对象的id来进行查找
+        2.根据对象的某些属性来匹配查找
+
+2.Model层的构成:
+    1.Cooperative:指各个公司之间的关系,相当于图(Graph)中的边(Edge)
+    2.Enterprise:指公司的实体类,相当于图(Graph)中的点(Point)
+    3.UserInfo:指Web端的用户信息,主要用于在Web端的登录操作,初步设定为每一个UserInfo实例与Enterprise一一
+    对应
+    4.User:真正的用户,根据权限分为三类:
+        1.管理员,具有所有权限
+        2.企业用户,包含一个UserInfo对象和一个Enterrpise对象,可以对隶属于其的公司资料进行更新和管理
+        3.普通用户,只能通过查看和操作Applet来获取各个企业之间关系信息
+
+3.Model类的一般构造:
+    1.包含对应的表名,TABLENAME
+    2.包含对应的字段名
+    (以上以常量方式保存)
+    3.和各字段一一对应的变量,以及相应的setter,getter
 
 # 2012-06-21
-Initialization
+Projce Initialization

@@ -31,4 +31,35 @@
     <!-- Build project and create distribution-->
     <target name="all" depends="project"/>
 
+    <taskdef name="reload" classname="org.apache.catalina.ant.ReloadTask">
+    </taskdef>
+
+    <property name="tomcat.home" value="/home/the/Desktop/tools/tomcat/apache-tomcat-7.0.16" />
+    <property name="tomcat.manager.username" value="admin"/>
+    <property name="tomcat.manager.password" value="123456"/>
+    <property name="manager.url"      value="http://localhost:8080/manager/text"/>
+    <property name="app.name" value="enisp"/>
+
+    <target name="reload" description="reload web application">
+
+        <echo message="==================================="/>
+        <echo message="    reload web application"/>
+        <echo message="==================================="/>
+        <reload  url="${manager.url}" username="${tomcat.manager.username}"
+            password="${tomcat.manager.password}" path="/${app.name}"/>
+    </target>
+
+    <target name="tomcat-start">
+        <java jar="${tomcat.home}/bin/bootstrap.jar" fork="true">
+            <jvmarg value="-Dcatalina.home=${tomcat.home}"/>
+        </java>
+    </target>
+
+    <target name="tomcat-stop">
+        <java jar="${tomcat.home}/bin/bootstrap.jar" fork="true">
+            <jvmarg value="-Dcatalina.home=${tomcat.home}"/>
+            <arg line="stop"/>
+        </java>
+    </target>
+
 </project>
