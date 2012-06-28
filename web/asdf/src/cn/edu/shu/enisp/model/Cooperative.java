@@ -6,12 +6,25 @@ public class Cooperative {
 	
 	public static final String ID = "num";
 	public static final String SOURCEID = "id";
-	public static final String TARETID = "partnerid";
+	public static final String TARGETID = "partnerid";
 	
 	private String id;
 	private String sourceid;
-	private String taretid;
+	private String targetid;
+
+    public Cooperative() {
+    }
+
+    public Cooperative(String sourceid, String targetid) {
+        this.sourceid = sourceid;
+        this.targetid = targetid;
+    }
 	
+    public Cooperative(String id, String sourceid, String targetid) {
+        this(sourceid, targetid);
+        this.id = id;
+    }
+
 	public String getId() {
 		return id;
 	}
@@ -26,10 +39,10 @@ public class Cooperative {
 		this.sourceid = sourceid;
 	}
 	
-	public String getTaretid() {
-		return taretid;
+	public String getTargetid() {
+		return targetid;
 	}
-	public void setTaretid(String taretid) {
-		this.taretid = taretid;
+	public void setTargetid(String targetid) {
+		this.targetid = targetid;
 	}
 }

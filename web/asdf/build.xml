@@ -13,6 +13,7 @@
     <!-- Normal build of application -->
     <target name="compile" depends="prepare">
         <javac srcdir="src" destdir="WebContent/WEB-INF/classes">
+            <compilerarg value="-Xlint"/>
             <classpath refid="class.path"/>
         </javac>
     </target>
@@ -47,19 +48,6 @@
         <echo message="==================================="/>
         <reload  url="${manager.url}" username="${tomcat.manager.username}"
             password="${tomcat.manager.password}" path="/${app.name}"/>
-    </target>
-
-    <target name="tomcat-start">
-        <java jar="${tomcat.home}/bin/bootstrap.jar" fork="true">
-            <jvmarg value="-Dcatalina.home=${tomcat.home}"/>
-        </java>
-    </target>
-
-    <target name="tomcat-stop">
-        <java jar="${tomcat.home}/bin/bootstrap.jar" fork="true">
-            <jvmarg value="-Dcatalina.home=${tomcat.home}"/>
-            <arg line="stop"/>
-        </java>
     </target>
 
 </project>

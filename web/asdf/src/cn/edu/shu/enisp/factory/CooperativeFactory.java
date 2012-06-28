@@ -10,7 +10,7 @@ public class CooperativeFactory extends Factory {
 	public Cooperative getObjectFromRequest(HttpServletRequest request) {
 		Cooperative cooperative = new Cooperative();
 		cooperative.setSourceid(request.getParameter(Cooperative.SOURCEID));
-		cooperative.setTaretid(request.getParameter(Cooperative.TARETID));
+		cooperative.setTargetid(request.getParameter(Cooperative.TARGETID));
 		return cooperative;
 	}
 

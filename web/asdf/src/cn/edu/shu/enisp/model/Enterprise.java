@@ -23,6 +23,30 @@ public class Enterprise {
 	private String email;
 	private String officalwebsite;
 	private String logopic;
+
+    public Enterprise() {
+    }
+    
+    public Enterprise(String enterprisename, String establishmenttime, String address, 
+            String telephonenumber, String faxnumaber, String email, String officalwebsite, 
+            String logopic) {
+        this.enterprisename = enterprisename;
+        this.establishmenttime = establishmenttime;
+        this.address = address;
+        this.telephonenumber = telephonenumber;
+        this.faxnumaber = faxnumaber;
+        this.email = email;
+        this.officalwebsite = officalwebsite;
+        this.logopic = logopic;
+    }
+    
+    public Enterprise(String id, String enterprisename, String establishmenttime, String address, 
+            String telephonenumber, String faxnumaber, String email, String officalwebsite, 
+            String logopic) {
+        this(enterprisename, establishmenttime, address, telephonenumber, faxnumaber, email,
+                officalwebsite, logopic);
+        this.id = id;
+    }
 	
 	public String getId() {
 		return id;
@@ -85,6 +109,4 @@ public class Enterprise {
 	public void setLogopic(String logopic) {
 		this.logopic = logopic;
 	}
-	
-	
 }
