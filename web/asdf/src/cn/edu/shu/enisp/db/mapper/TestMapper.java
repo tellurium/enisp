@@ -19,7 +19,7 @@ public class TestMapper extends BaseMapper<Test> {
         if (field.equals(ID)) {
             return model.getId();
         } else if (field.equals(TEXT)) {
-
+            return model
         } else if (field.equals(DES)) {
 
         } else if (field.equals(TIME)) {
