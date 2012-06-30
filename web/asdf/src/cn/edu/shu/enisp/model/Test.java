@@ -1,50 +1,42 @@
 package cn.edu.shu.enisp.model;
 
-public class Test {
-    private String id;
-    private String text;
-    private String des;
-    private String time;
+public class Test extends BaseModel {
+    public static final String TABLENAME = "test";
 
-    public Test() {
+    public static final String ID = "id";
+    public static final String TEXT = "text";
+    public static final String DES = "des";
+    public static final String TIME = "time";
+
+    public Test(){
     }
 
-    public Test(String text, String des, String time) {
-        this.text = text;
-        this.des = des;
-        this.time = time;
+    public Test(String text, String des, String time){
+        modelMap.put(TEXT, text);
+        modelMap.put(DES, des);
+        modelMap.put(TIME, time);
     }
 
-    public Test(String id, String text, String des, String time) {
+    public Test(String id, String text, String des, String time){
         this(text, des, time);
-        this.id = id;
-    }
-
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-
-    public String getText() {
-        return this.text;
-    }
-    public void setText(String text) {
-        this.text = text;
+        modelMap.put(ID, id);
     }
     
-    public String getDes() {
-        return this.des;
+    @Override
+    public String getID() {
+        return Test.ID;
     }
-    public void setDes(String des) {
-        this.des = des;
+
+    @Override
+    public String getTableName() {
+        return Test.TABLENAME;
     }
-    
-    public String getTime() {
-        return this.time;
-    }
-    public void setTime(String time) {
-        this.time = time;
+
+    @Override
+    public void setUpMap() {
+        putMappingField(ID);
+        putMappingField(TEXT);
+        putMappingField(DES);
+        putMappingField(TIME);
     }
 }

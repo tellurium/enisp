@@ -9,8 +9,8 @@ public class CooperativeFactory extends Factory {
 	@Override
 	public Cooperative getObjectFromRequest(HttpServletRequest request) {
 		Cooperative cooperative = new Cooperative();
-		cooperative.setSourceid(request.getParameter(Cooperative.SOURCEID));
-		cooperative.setTargetid(request.getParameter(Cooperative.TARGETID));
+		/* cooperative.setSourceid(request.getParameter(Cooperative.SOURCEID)); */
+		/* cooperative.setTargetid(request.getParameter(Cooperative.TARGETID)); */
 		return cooperative;
 	}
 
