@@ -58,8 +58,8 @@ public class TestServlet extends HttpServlet {
         // ORM 查询功能
         out.println("\n--- Select Test ---");
         out.println("\n1.Select Test");
-        ResultSet result1 = operator.selectObjectFromDB(test); 
-        if (result1 != null) {
+        test = (Test) operator.selectObjectFromDB(test); 
+        if (test != null) {
             out.println("Select successed");
         } else {
             out.println("Select failed");
@@ -67,8 +67,8 @@ public class TestServlet extends HttpServlet {
         
         out.println("\n2.Select Test");
         Test t = new Test("1", "", "", "");
-        ResultSet result2 = operator.selectObjectFromDB(t); 
-        if (result2 != null) {
+        t = (Test) operator.selectObjectFromDB(t); 
+        if (t != null) {
             out.println("Select successed");
         } else {
             out.println("Select failed");

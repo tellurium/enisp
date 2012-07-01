@@ -17,7 +17,7 @@ public class DBOperator {
 	private Connection mConnection;
 	private Statement mStatement;
 	private PreparedStatement mPreparedStatement;
-	private DBResult mDBResult = new DBResult();
+    private ResultSet mResultSet;
 
 	private enum ExecuteType {INSERT, DELETE, UPDATE, SELECT};
 
@@ -41,9 +41,9 @@ public class DBOperator {
 	
 	public void closeDBConnection() {
 		try {
-			if (mDBResult.mResultSet != null) {
-				mDBResult.mResultSet.close();
-				mDBResult.mResultSet = null;
+			if (mResultSet != null) {
+				mResultSet.close();
+				mResultSet = null;
 			}
 			if (mPreparedStatement != null) {
 				mPreparedStatement.close();
@@ -64,7 +64,11 @@ public class DBOperator {
 
     public boolean insertObjectToDB(BaseModel model) {
         if (executeUpdateOperation(ExecuteType.INSERT, model)) {
-            ResultSet resultSet = executeQueryOperation(ExecuteType.SELECT, model);
+            model = selectObjectFromDB(model); 
+            String id = model.getProperty(model.getID());
+            if (id != null && id.length() > 0) {
+                return true;
+            }
         }
         return false;
     }
@@ -77,7 +81,7 @@ public class DBOperator {
         return executeUpdateOperation(ExecuteType.UPDATE, model);
     }
 
-    public ResultSet selectObjectFromDB(BaseModel model) {
+    public BaseModel selectObjectFromDB(BaseModel model) {
         return executeQueryOperation(ExecuteType.SELECT, model);
     }
 
@@ -116,27 +120,42 @@ public class DBOperator {
         return result;
     }
 
-    public ResultSet executeQueryOperation(ExecuteType type, BaseModel model) {
-        ResultSet result = null;
+    public BaseModel executeQueryOperation(ExecuteType type, BaseModel model) {
+        String statementString = null;
 		try {
 			startDBConnection();
 			
             switch(type) {
             case SELECT:
-                mPreparedStatement = getSelectPreparedStatement(model);
+                statementString = getSelectStatementString(model);
                 break; 
             default:
                 break;
             }
-            if (mPreparedStatement != null) {
-                result = mPreparedStatement.executeQuery();
+            if (statementString != null) {
+                mStatement = mConnection.createStatement();
+                mResultSet = mStatement.executeQuery(statementString);
+                if (mResultSet != null) {
+                    while(mResultSet.next()) {
+                        Iterator iterator = model.getIterator();
+                        while(iterator.hasNext()) {
+                            Map.Entry entry = (Map.Entry) iterator.next();
+                            String key = (String) entry.getKey();
+                            model.setProperty(key, mResultSet.getString(key));
+                        } 
+                        String id = model.getProperty(model.getID());
+                        if (id != null && id.length() > 0 ) {
+                            return model;
+                        }
+                    }
+                }
             }
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
 			closeDBConnection();
 		}
-        return result;
+        return null;
     }
 
 	public String getInsertStatementString(BaseModel object) {
@@ -170,8 +189,7 @@ public class DBOperator {
         sb.append(")");
 
         System.out.println(sb.toString());
-        /* return sb.toString(); */
-        return null;
+        return sb.toString();
     }
 
 	public String getDeleteStatementString(BaseModel object) {
@@ -184,8 +202,7 @@ public class DBOperator {
         sb.append(object.getProperty(object.getID()));
 
         System.out.println(sb.toString());
-        /* return sb.toString(); */
-        return null;
+        return sb.toString();
     }
 
 	public String getUpdateStatementString(BaseModel object) {
@@ -220,11 +237,10 @@ public class DBOperator {
         sb.append(object.getProperty(object.ID));
 
         System.out.println(sb.toString());
-        /* return sb.toString(); */
-        return null;
+        return sb.toString();
     }
     
-	public PreparedStatement getSelectPreparedStatement(BaseModel object) {
+	public String getSelectStatementString(BaseModel object) {
         StringBuilder sb = new StringBuilder(); 
         sb.append("select * from ");
         sb.append(object.getTableName());
@@ -259,6 +275,6 @@ public class DBOperator {
         }
 
         System.out.println(sb.toString());
-        return null;
+        return sb.toString();
     }
 }
