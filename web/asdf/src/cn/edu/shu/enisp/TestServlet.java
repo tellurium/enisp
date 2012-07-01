@@ -31,7 +31,7 @@ public class TestServlet extends HttpServlet {
 
         // 
         out.println("\n--- Model Test ---");
-        Test test = new Test("text value", "des value", "time value");
+        Test test = new Test("text value", "des value", "1990-09-01");
         out.println(test.TABLENAME);
         out.println(test.getProperty(Test.DES));
 		

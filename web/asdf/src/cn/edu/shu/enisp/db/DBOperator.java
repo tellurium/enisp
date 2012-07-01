@@ -171,7 +171,7 @@ public class DBOperator {
             }
             if (!firstFlag) {
                 fieldsStringBuilder.append(", ");
-                valueStringBuilder.append(", ");
+                valueStringBuilder.append("', '");
             } else {
                 firstFlag = false;
             }
@@ -184,9 +184,9 @@ public class DBOperator {
         sb.append(object.getTableName());
         sb.append(" (");
         sb.append(fieldsStringBuilder.toString());
-        sb.append(") values (");
+        sb.append(") values ('");
         sb.append(valueStringBuilder.toString());
-        sb.append(")");
+        sb.append("')");
 
         System.out.println(sb.toString());
         return sb.toString();
