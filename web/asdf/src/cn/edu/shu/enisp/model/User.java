@@ -1,6 +1,6 @@
 package cn.edu.shu.enisp.model;
 
-public class User {
+public class User extends BaseModel {
     public static final String TABLENAME = "user";
 
     public static final String ID = "id";
@@ -9,59 +9,39 @@ public class User {
     public static final String PASSWORD = "password"; 
     public static final String TIME = "time"; 
 
-    private String id;
-    private String username;
-    private String privilege;
-    private String password;
-    private String time;
+    public static final String PRIVILEGE_NORMAL = "1";
+    public static final String PRIVLIEGE_ADMIN = "2";
+    public static final String PRIVLIEGE_ENTERPRISE = "3";
 
     public User() {
+        super();
     }
     
     public User(String username, String privilege, String password, String time) {
-        this.username = username;
-        this.privilege = privilege;
-        this.password = password;
-        this.time = time;
+        this();
+        modelMap.put(USERNAME, username);
+        modelMap.put(PRIVILEGE, privilege);
+        modelMap.put(PASSWORD, password);
+        modelMap.put(TIME, time);
     }
 
     public User(String id, String username, String privilege, String password, String time) {
         this(username, privilege, password, time);
-        this.id = id;
+        modelMap.put(ID, id);
     }
 
-    public String getId() {
-        return this.id;
-    }
-    public void setId(String id) {
-        this.id = id;
+    @Override
+    public String getID() {
+        return User.ID;
     }
 
-    public String getUsername() {
-        return this.username;
+    @Override
+    public String getTableName() {
+        return User.TABLENAME;
     }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    
-    public String getPrivilege() {
-        return this.privilege;
-    }
-    public void setPrivilege(String privilege) {
-        this.privilege = privilege;
-    }
-    
-    public String getPassword() {
-        return this.password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
-    public String getTime() {
-        return this.time;
-    }
-    public void setTime(String time) {
-        this.time = time;
+
+    @Override
+    public void setUpMap() {
+        _setUpMap(ID, PRIVILEGE, USERNAME, PASSWORD, TIME);
     }
 }

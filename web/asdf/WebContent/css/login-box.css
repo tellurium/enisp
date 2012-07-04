@@ -1,5 +1,5 @@
 body {
-	background: url(../images/bg.jpg) no-repeat left top;
+	background: url(../images/bg_1.png) no-repeat left top;
 }
 
 body table tr td label {
@@ -23,7 +23,7 @@ body table tr td input {
 	padding: 58px 76px 0 76px;
 	color: #ebebeb;
 	font: 12px Arial, Helvetica, sans-serif;
-	background: url(../images/login-box-backg.png) no-repeat left top;
+	background: url(../images/login-box-backg_2.png) no-repeat left top;
 }
 
 #status-info p {
@@ -61,7 +61,7 @@ body table tr td input {
 
 #login-submit-button {
 	background-color:transparent;
-	background-image: url(../images/login-btn.png);
+	background-image: url(../images/login-btn_2.png);
 	width: 103px;
 	height: 42px;
 	margin-left: 90px;
@@ -72,9 +72,8 @@ body table tr td input {
 	width: 205px;
 	padding: 10px 4px 6px 3px;
 	border: 1px solid #0d2c52;
-	background-color:#1e4f8a;
 	font-size: 16px;
-	color: #ebebeb;
+	color: #000000;
 }
 
 

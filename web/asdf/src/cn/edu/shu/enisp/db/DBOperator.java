@@ -261,11 +261,18 @@ public class DBOperator {
                 if (key.equals(object.getID())) {
                     continue; 
                 }
+
+                String value = (String) entry.getValue();
+                if (value == null || value.length() == 0) {
+                    continue;
+                }
+
                 if (!firstFlag) {
                     fieldAndValueStringBuilder.append(" and ");
                 } else {
                     firstFlag = false;
                 }
+
                 fieldAndValueStringBuilder.append(key);
                 fieldAndValueStringBuilder.append("='");
                 fieldAndValueStringBuilder.append((String) entry.getValue());

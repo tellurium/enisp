@@ -13,16 +13,12 @@ public abstract class BaseModel {
 
     protected Map<String, String> modelMap = new HashMap<String, String>();
 
-    public abstract void setUpMap();
+    protected abstract void setUpMap();
     public abstract String getTableName();
     public abstract String getID();
 
     public BaseModel() {
         setUpMap();
-    }
-
-    protected void putMappingField(String field) {
-        modelMap.put(field, "");
     }
 
     public int getFieldSize() {
@@ -31,6 +27,10 @@ public abstract class BaseModel {
 
     public Iterator getIterator() {
         return modelMap.entrySet().iterator();
+    }
+
+    private void putMappingField(String field) {
+        modelMap.put(field, "");
     }
 
     public String getProperty(String field) {
@@ -43,5 +43,11 @@ public abstract class BaseModel {
 
     public List<BaseModel> getModelListFromResultSet(ResultSet resultSet) {
         return null;
+    }
+
+    protected void _setUpMap(String ... fields) {
+        for (int i = 0; i < fields.length; i++) {
+            this.putMappingField(fields[i]);
+        }
     }
 }

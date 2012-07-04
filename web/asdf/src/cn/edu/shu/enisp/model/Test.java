@@ -9,9 +9,11 @@ public class Test extends BaseModel {
     public static final String TIME = "time";
 
     public Test(){
+        super();
     }
 
     public Test(String text, String des, String time){
+        this();
         modelMap.put(TEXT, text);
         modelMap.put(DES, des);
         modelMap.put(TIME, time);
@@ -34,9 +36,6 @@ public class Test extends BaseModel {
 
     @Override
     public void setUpMap() {
-        putMappingField(ID);
-        putMappingField(TEXT);
-        putMappingField(DES);
-        putMappingField(TIME);
+        _setUpMap(ID, TEXT, DES, TIME);
     }
 }

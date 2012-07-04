@@ -7,6 +7,20 @@
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   
+  <!-- 用户登录操作 -->
+  <servlet>
+  	<servlet-name>UserLogin</servlet-name>
+  	<servlet-class>cn.edu.shu.enisp.UserServlet</servlet-class>
+  	<init-param>
+  		<param-name>action</param-name>
+  		<param-value>login</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UserLogin</servlet-name>
+  	<url-pattern>/UserLogin</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
   	<servlet-name>test</servlet-name>
   	<servlet-class>cn.edu.shu.enisp.TestServlet</servlet-class>
@@ -15,44 +29,4 @@
   	<servlet-name>test</servlet-name>
   	<url-pattern>/test</url-pattern>
   </servlet-mapping>
-  
-  <servlet>
-  	<servlet-name>RegisterUser</servlet-name>
-  	<servlet-class>cn.edu.shu.enisp.UserServlet</servlet-class>
-  	<init-param>
-  		<param-name>action</param-name>
-  		<param-value>insert</param-value>
-  	</init-param>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>RegisterUser</servlet-name>
-  	<url-pattern>/RegisterUser</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-	<servlet-name>SelectUser</servlet-name>
-	<servlet-class>cn.edu.shu.enisp.UserServlet</servlet-class>
-	<init-param>
-		<param-name>action</param-name>
-		<param-value>select</param-value>
-	</init-param>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>SelectUser</servlet-name>
-  	<url-pattern>/SelectUser</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-	<servlet-name>UpdateUser</servlet-name>
-	<servlet-class>cn.edu.shu.enisp.UserServlet</servlet-class>
-	<init-param>
-		<param-name>action</param-name>
-		<param-value>update</param-value>
-	</init-param>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>UpdateUser</servlet-name>
-  	<url-pattern>/UpdateUser</url-pattern>
-  </servlet-mapping>
-  
 </web-app>
