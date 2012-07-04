@@ -16,7 +16,7 @@
 %>
 	<div id="login-box">
 	<form name="form1" method="post" action="UserLogin">
-	<H2>登录</H2>
+	<h2>登录</h2>
 	你好，请登录或注册...
 	<br />
 	<%
