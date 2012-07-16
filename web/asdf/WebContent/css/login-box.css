@@ -26,11 +26,27 @@ body table tr td input {
 	background: url(../images/login-box-backg_2.png) no-repeat left top;
 }
 
+#register-title {
+    background-color: #0000FF;
+    float: center;
+    color: #FFFFFF;
+	font: 25px Arial, Helvetica, sans-serif;
+    width: 350px;
+    height: 30px;
+}
+
+#register-divider {
+    background-color: #0000FF;
+    float: center;
+    color: #FFFFFF;
+	font: 25px Arial, Helvetica, sans-serif;
+}
+
 #register-box-normal {
-	margin-left: 100px;
+	margin-left: 40px;
 	margin-top: 20px;
 	width:333px;
-	height: 700px;
+	height: 620px;
 	padding: 58px 76px 0 76px;
 	color: #ebebeb;
 	font: 12px Arial, Helvetica, sans-serif;
@@ -39,10 +55,10 @@ body table tr td input {
 }
 
 #register-box-enterprise {
-	margin-right: 100px;
+	margin-right: 40px;
 	margin-top: 20px;
 	width:333px;
-	height: 700px;
+	height: 620px;
 	padding: 58px 76px 0 76px;
 	color: #ebebeb;
 	font: 12px Arial, Helvetica, sans-serif;
@@ -52,6 +68,10 @@ body table tr td input {
 
 #status-info p {
 	color: #F00;
+}
+
+#status-info-positive p {
+    color: #0F0;
 }
 
 #login-box img {
@@ -100,17 +120,6 @@ body table tr td input {
 	color: #000000;
 }
 
-.normal-button {
-    margin-top: 10px;
-	background-color: transparent;
-	background-image: url(../images/btn_bg.png);
-    color: #333333;
-	height: 42px;
-    width: 103px;
-	border: none;
-    float: right;
-	font-size: 16px;
-}
 
 .login-box-options  {
 	clear:both;

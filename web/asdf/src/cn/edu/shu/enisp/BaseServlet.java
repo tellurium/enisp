@@ -25,6 +25,11 @@ public abstract class BaseServlet extends HttpServlet {
     public abstract void processAction(String action, HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException;
         
+    protected void showError(HttpServletRequest request, HttpServletResponse response) 
+        throws ServletException, IOException{
+        out(response, "Something wrong.");
+        out(response, "From " + this.getClass());
+    }
 	
 	protected void out(HttpServletResponse response, String outString) 
 			throws ServletException, IOException {

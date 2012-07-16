@@ -20,9 +20,14 @@
 	你好，请登录或注册...
 	<br />
 	<%
-	String status_info = (String)request.getAttribute(UserServlet.STATUS_INFO);
+	String status_info = (String) request.getAttribute(UserServlet.STATUS_INFO);
 	if (status_info != null && status_info.length() > 0) {
-		out.println("<div id=\"status-info\"><p>" + status_info + "</p></div>");
+        String info_flag = (String) request.getAttribute(UserServlet.STATUS_INFO_FLAG);
+        if(info_flag == null || info_flag.length() == 0) {
+            out.println("<div id=\"status-info\"><p>" + status_info + "</p></div>");
+        } else {
+            out.println("<div id=\"status-info-positive\"><p>" + status_info + "</p></div>");
+        }
 	}
 	%>
 	<br />

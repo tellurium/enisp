@@ -20,7 +20,35 @@
   	<servlet-name>UserLogin</servlet-name>
   	<url-pattern>/UserLogin</url-pattern>
   </servlet-mapping>
-  
+
+  <!-- 普通用户注册操作 -->
+  <servlet>
+  	<servlet-name>RegisterNormalUser</servlet-name>
+  	<servlet-class>cn.edu.shu.enisp.UserServlet</servlet-class>
+  	<init-param>
+  		<param-name>action</param-name>
+  		<param-value>register-normal</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>RegisterNormalUser</servlet-name>
+  	<url-pattern>/RegisterNormalUser</url-pattern>
+  </servlet-mapping>
+
+  <!-- 企业用户注册操作 -->
+  <servlet>
+  	<servlet-name>RegisterEnterpriseUser</servlet-name>
+  	<servlet-class>cn.edu.shu.enisp.UserServlet</servlet-class>
+  	<init-param>
+  		<param-name>action</param-name>
+  		<param-value>register-enterprise</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>RegisterEnterpriseUser</servlet-name>
+  	<url-pattern>/RegisterEnterpriseUser</url-pattern>
+  </servlet-mapping>
+
   <servlet>
   	<servlet-name>test</servlet-name>
   	<servlet-class>cn.edu.shu.enisp.TestServlet</servlet-class>
