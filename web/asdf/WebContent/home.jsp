@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+    <%@ page import="cn.edu.shu.enisp.session.EnispSession" %>
+    <%@ page import="cn.edu.shu.enisp.model.User" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Enterprise Networked Innovation Service Platform</title>
@@ -10,8 +12,16 @@
 <body>
     <div id="menu">
              欢迎你，  <%=request.getSession().getAttribute("username") %> <a class="fontcolor"> | </a>   
-               <a href="SelectUser">修改个人信息</a>   <a class="fontcolor"> | </a>   
+               <a href="UpdateUser">修改个人信息</a>   <a class="fontcolor"> | </a>   
+               <%
+                   String privilege = EnispSession.getPrivilege(request);   
+                   if (privilege.equals(User.PRIVLIEGE_ENTERPRISE)) {
+
+               %>
                <a href="changepartner.jsp">修改伙伴信息</a> <a class="fontcolor"> | </a> 
+               <%
+                   }
+               %>
                <a href="uploadlogo.jsp">上传图片</a>  <a class="fontcolor"> | </a> 
                <a href="logout.jsp">登出</a> 
     </div>   

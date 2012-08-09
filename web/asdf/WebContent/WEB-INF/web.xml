@@ -34,6 +34,20 @@
   	<servlet-name>RegisterNormalUser</servlet-name>
   	<url-pattern>/RegisterNormalUser</url-pattern>
   </servlet-mapping>
+  
+  <!-- 用户更改信息操作 -->
+  <servlet>
+  	<servlet-name>UpdateUser</servlet-name>
+  	<servlet-class>cn.edu.shu.enisp.UserServlet</servlet-class>
+  	<init-param>
+  		<param-name>action</param-name>
+  		<param-value>update-user</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UpdateUser</servlet-name>
+  	<url-pattern>/UpdateUser</url-pattern>
+  </servlet-mapping>
 
   <!-- 企业用户注册操作 -->
   <servlet>

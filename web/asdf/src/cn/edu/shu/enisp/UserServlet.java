@@ -33,6 +33,7 @@ public class UserServlet extends BaseServlet {
     public static final String LOGIN = "login";
     public static final String REGISTER_NORMAL = "register-normal";
     public static final String REGISTER_ENTERPRISE = "register-enterprise";
+    public static final String UPDATE_USER = "update-user";
 
     private String status_info;
 
@@ -45,6 +46,8 @@ public class UserServlet extends BaseServlet {
             processRegisterNormalUserAction(request, response);
         } else if (action.equals(REGISTER_ENTERPRISE)) {
             processRegisterEnterpriseUserAction(request, response);
+        } else if (action.equals(UPDATE_USER)) {
+            processUpdateUserAction(request, response);
         } else { 
             showError(request, response);
         }
@@ -265,5 +268,16 @@ public class UserServlet extends BaseServlet {
             request.setAttribute(USER_TYPE, USER_ENTERPRISE);
             goJSP("/register.jsp", request, response);
         }
+    }
+
+    // 处理更新信息操作
+    private void processUpdateUserAction(HttpServletRequest request, 
+            HttpServletResponse response) throws ServletException, IOException {
+        // 根据用户类型的不同分流到不同的界面
+        String privilege = EnispSession.getPrivilege(request);
+        if (privilege.) {
+            
+        }
+        goJSP("/error.jsp", request, response);
     }
 }
