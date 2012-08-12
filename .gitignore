@@ -6,7 +6,7 @@
 *.ear
 
 # sql files
-*.sql
+#*.sql
 
 # bin files
 /bin

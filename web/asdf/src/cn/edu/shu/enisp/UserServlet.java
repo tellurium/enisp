@@ -275,9 +275,13 @@ public class UserServlet extends BaseServlet {
             HttpServletResponse response) throws ServletException, IOException {
         // 根据用户类型的不同分流到不同的界面
         String privilege = EnispSession.getPrivilege(request);
-        if (privilege.) {
-            
+        if (privilege.equals(User.PRIVILEGE_NORMAL)) {
+            goJSP("/changeNormalInfo.jsp", request, response);
+        } else if(privilege.equals(User.PRIVLIEGE_ENTERPRISE)){
+            goJSP("/changeEnterpriseInfo.jsp", request, response);
+        } else {
+            goJSP("/error.jsp", request, response);
         }
-        goJSP("/error.jsp", request, response);
     }
 }
+

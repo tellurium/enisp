@@ -1,0 +1,80 @@
+* {
+}
+
+body {
+	background: url(../images/bg_1.png) no-repeat left top;
+}
+
+body table tr td label {
+	text-align: center;
+}
+
+body table tr td input {
+	width: 100%;
+}
+
+.form-login  {
+	width: 205px;
+	padding: 10px 4px 6px 3px;
+	border: 1px solid #0d2c52;
+	font-size: 16px;
+	color: #000000;
+}
+
+.normal-button {
+    margin-top: 10px;
+	background-color: transparent;
+	background-image: url(../images/btn_bg.png);
+    color: #333333;
+	height: 42px;
+    width: 103px;
+	border: none;
+    float: right;
+	font-size: 16px;
+}
+
+.establish-time {
+    width: 45px;
+    padding: 10px 4px 6px 3px;
+	border: 1px solid #0d2c52;
+	font-size: 16px;
+	color: #000000;
+}
+
+#status-info p {
+	color: #F00;
+}
+
+#register-container {
+    margin: 0 auto;
+    width: 95%;
+}
+
+#register-title {
+    margin-bottom: 5px;
+    color: #444444;
+	font: 20px Arial, Helvetica, sans-serif;
+    height: 40px;
+    text-align: center;
+}
+
+#change-normal-info {
+	width: 333px;
+	height: 620px;
+    margin: auto;
+	padding: 58px 76px 0 76px;
+	color: #ebebeb;
+	font: 12px Arial, Helvetica, sans-serif;
+	background: url(../images/register-box-backg.png) no-repeat left top;
+}
+
+#register-box-enterprise {
+	width: 333px;
+	height: 620px;
+    margin: 0px 25px;
+	padding: 58px 76px 0 76px;
+	color: #ebebeb;
+	font: 12px Arial, Helvetica, sans-serif;
+    float: right;
+	background: url(../images/register-box-backg.png) no-repeat left top;
+}
