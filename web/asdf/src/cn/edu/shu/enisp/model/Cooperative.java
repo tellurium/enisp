@@ -1,6 +1,5 @@
 package cn.edu.shu.enisp.model;
 
-// 代表公司之间关系的表和Java类映射
 public class Cooperative extends BaseModel {
 	public static final String TABLENAME = "cooperativeenttable";
 	

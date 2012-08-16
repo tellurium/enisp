@@ -14,6 +14,7 @@ import cn.edu.shu.enisp.model.UserInfo;
 import cn.edu.shu.enisp.session.EnispSession;
 import cn.edu.shu.enisp.util.StringSnippet;
 
+@SuppressWarnings("serial")
 public class UserServlet extends BaseServlet {
     // jsp attributes
     public static final String STATUS_INFO = "status_info";
@@ -34,6 +35,7 @@ public class UserServlet extends BaseServlet {
     public static final String REGISTER_NORMAL = "register-normal";
     public static final String REGISTER_ENTERPRISE = "register-enterprise";
     public static final String UPDATE_USER = "update-user";
+    public static final String CHANGE_INFO = "change-info";
 
     private String status_info;
 
@@ -48,6 +50,8 @@ public class UserServlet extends BaseServlet {
             processRegisterEnterpriseUserAction(request, response);
         } else if (action.equals(UPDATE_USER)) {
             processUpdateUserAction(request, response);
+        } else if (action.equals(CHANGE_INFO)) {
+            processChangeInfoAction(request, response);
         } else { 
             showError(request, response);
         }
@@ -58,6 +62,7 @@ public class UserServlet extends BaseServlet {
         throws ServletException, IOException {
         String username = null;
         String privilege = null;
+        String userid = null;
         String password = null;
         boolean isSuccessed = false;
         // 用户分为两类:
@@ -78,6 +83,7 @@ public class UserServlet extends BaseServlet {
             if (user != null) {
                 username = user.getProperty(User.USERNAME);
                 privilege = user.getProperty(User.PRIVILEGE);
+                userid = user.getProperty(User.ID);
                 isSuccessed = true;   
             } 
             // Step 4: 从UserInfo表中查找是否有该用户
@@ -87,6 +93,7 @@ public class UserServlet extends BaseServlet {
                 if (userinfo != null) {
                     username = userinfo.getProperty(UserInfo.USERNAME);
                     privilege = User.PRIVLIEGE_ENTERPRISE;
+                    userid = userinfo.getProperty(UserInfo.ID);
                     isSuccessed = true;
                 } 
                 // Step 5: 当两张表中都没有该用户
@@ -100,6 +107,7 @@ public class UserServlet extends BaseServlet {
         if (isSuccessed) {
             EnispSession.setUsername(request, username);
             EnispSession.setPrivilege(request, privilege);
+            EnispSession.setUserId(request, userid);
             goJSP("/home.jsp", request, response);
         } 
         else {
@@ -283,5 +291,46 @@ public class UserServlet extends BaseServlet {
             goJSP("/error.jsp", request, response);
         }
     }
-}
 
+    // 处理提交更新信息操作
+    private void processChangeInfoAction(HttpServletRequest request, 
+            HttpServletResponse response) throws ServletException, IOException {
+        String password = null;
+        String confirm_password = null;
+
+        // 修改密码校对(部分已经使用javascript完成)
+        password = request.getParameter(User.PASSWORD).trim();
+        confirm_password = request.getParameter(UserServlet.CONFIRM_PASSWORD).trim();
+        if (password != null && confirm_password != null && password.equals(confirm_password)) {
+             
+        } else {
+            status_info = "密码不相同,请重新输入";
+            request.setAttribute(STATUS_INFO, status_info);
+            goJSP("/UpdateUser", request, response);
+        }
+
+        // 根据用户类型的不同采取不同的操作
+        String privilege = EnispSession.getPrivilege(request);
+
+        if (privilege.equals(User.PRIVILEGE_NORMAL)) {
+            User user = new User();
+            user.setProperty(User.ID, EnispSession.getUserId(request));
+            user = (User) mDBOperator.selectObjectFromDB(user);
+            user.setProperty(User.PASSWORD, password);
+            mDBOperator.updateObjectToDB(user);
+
+            // 清空session, 退出
+            EnispSession.invalidate(request);
+
+            status_info = "密码修改成功,请重新登录";
+            request.setAttribute(STATUS_INFO, status_info);
+            request.setAttribute(STATUS_INFO_FLAG, "positive");
+            goJSP("/index.jsp", request, response);
+        } else if(privilege.equals(User.PRIVLIEGE_ENTERPRISE)){
+            //
+        } else {
+            goJSP("/error.jsp", request, response);
+        }
+
+    }
+}

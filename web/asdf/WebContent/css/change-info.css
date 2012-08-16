@@ -58,23 +58,12 @@ body table tr td input {
     text-align: center;
 }
 
-#change-normal-info {
+#change-info {
 	width: 333px;
 	height: 620px;
     margin: auto;
 	padding: 58px 76px 0 76px;
 	color: #ebebeb;
 	font: 12px Arial, Helvetica, sans-serif;
-	background: url(../images/register-box-backg.png) no-repeat left top;
-}
-
-#register-box-enterprise {
-	width: 333px;
-	height: 620px;
-    margin: 0px 25px;
-	padding: 58px 76px 0 76px;
-	color: #ebebeb;
-	font: 12px Arial, Helvetica, sans-serif;
-    float: right;
 	background: url(../images/register-box-backg.png) no-repeat left top;
 }

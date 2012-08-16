@@ -48,6 +48,20 @@
   	<servlet-name>UpdateUser</servlet-name>
   	<url-pattern>/UpdateUser</url-pattern>
   </servlet-mapping>
+  
+  <!-- 用户提交更改信息操作 -->
+  <servlet>
+  	<servlet-name>ChangeInfo</servlet-name>
+  	<servlet-class>cn.edu.shu.enisp.UserServlet</servlet-class>
+  	<init-param>
+  		<param-name>action</param-name>
+  		<param-value>change-info</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ChangeInfo</servlet-name>
+  	<url-pattern>/ChangeInfo</url-pattern>
+  </servlet-mapping>
 
   <!-- 企业用户注册操作 -->
   <servlet>

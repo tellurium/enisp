@@ -81,7 +81,7 @@ public abstract class Factory {
     }
 
     private static String getFormatedRequestParameter(HttpServletRequest request, String parameterName) {
-		String result = (String) request.getParameter(parameterName);
+		String result = request.getParameter(parameterName);
 		if (result == null || result.length() == 0) return "";
 		return result;
 	}

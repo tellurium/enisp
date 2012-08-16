@@ -1,6 +1,5 @@
 package cn.edu.shu.enisp.model;
 
-// 公司表和Java类映射
 public class Enterprise extends BaseModel {
 	public static final String TABLENAME = "enterprisetable";
 	
