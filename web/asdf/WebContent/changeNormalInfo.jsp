@@ -23,12 +23,15 @@ pageEncoding="UTF-8"%>
                 if (status_info != null && status_info.length() > 0) {
                     String info_flag = (String) request.getAttribute(UserServlet.STATUS_INFO_FLAG);
                     if(info_flag == null || info_flag.length() == 0) {
+                        status_info = "";
                     } else {
                         out.println("<div id=\"status-info-positive\"><p>" + status_info + "</p></div>");
                     }
+                } else {
+                    status_info = " ";
                 }
                 %>
-                <div id="status-info"><p id="info"></p></div>
+                <div id="status-info"><p id="info"><%= status_info %></p></div>
                 <table>
                     <tr>
                         <td><label for="password">Password:</label></td>

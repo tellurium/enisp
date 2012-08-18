@@ -36,6 +36,7 @@ public class UserServlet extends BaseServlet {
     public static final String REGISTER_ENTERPRISE = "register-enterprise";
     public static final String UPDATE_USER = "update-user";
     public static final String CHANGE_INFO = "change-info";
+    public static final String LOGOUT = "logout";
 
     private String status_info;
 
@@ -52,6 +53,8 @@ public class UserServlet extends BaseServlet {
             processUpdateUserAction(request, response);
         } else if (action.equals(CHANGE_INFO)) {
             processChangeInfoAction(request, response);
+        } else if (action.equals(LOGOUT)) {
+            processLogoutAction(request, response);
         } else { 
             showError(request, response);
         }
@@ -114,6 +117,13 @@ public class UserServlet extends BaseServlet {
             request.setAttribute(STATUS_INFO, status_info);
             goJSP("/index.jsp", request, response);
         }
+    }
+
+    private void processLogoutAction(HttpServletRequest request, HttpServletResponse response) 
+        throws ServletException, IOException {
+        EnispSession.invalidate(request);
+
+        goJSP("/index.jsp", request, response);
     }
 
     // 处理普通用户注册操作
@@ -286,6 +296,35 @@ public class UserServlet extends BaseServlet {
         if (privilege.equals(User.PRIVILEGE_NORMAL)) {
             goJSP("/changeNormalInfo.jsp", request, response);
         } else if(privilege.equals(User.PRIVLIEGE_ENTERPRISE)){
+            String username = null;
+            String password = null;
+            String confirm_password = null;
+            String enterprisename = null;
+            String year = null;
+            String month = null;
+            String day = null;
+            String establishtime = null;
+            UserInfo userInfo = new UserInfo();
+            Enterprise enterprise = new Enterprise();
+            userInfo.setProperty(UserInfo.ID, EnispSession.getUserId(request));
+            userInfo = (UserInfo) mDBOperator.selectObjectFromDB(userInfo);
+            enterprise.setProperty(Enterprise.ID, userInfo.getProperty(UserInfo.ENTERPRISEID));
+            enterprise = (Enterprise) mDBOperator.selectObjectFromDB(enterprise);
+
+            String date = enterprise.getProperty(Enterprise.ESTABLISHMENTTIME);
+            if (date != null && date.length() > 0) {
+                String[] dates = date.split("-");
+                year = dates[0];
+                month = dates[1];
+                day = dates[2];
+            }
+
+            Factory.pushObjectIntoRequestAttribute(request, enterprise);
+            Factory.pushObjectIntoRequestAttribute(request, userInfo);
+            request.setAttribute(YEAR, year);
+            request.setAttribute(MONTH, month);
+            request.setAttribute(DAY, day); request.setAttribute(STATUS_INFO, status_info);
+            request.setAttribute(USER_TYPE, USER_ENTERPRISE);
             goJSP("/changeEnterpriseInfo.jsp", request, response);
         } else {
             goJSP("/error.jsp", request, response);
@@ -322,12 +361,41 @@ public class UserServlet extends BaseServlet {
             // 清空session, 退出
             EnispSession.invalidate(request);
 
-            status_info = "密码修改成功,请重新登录";
+            status_info = "信息修改成功,请重新登录";
             request.setAttribute(STATUS_INFO, status_info);
             request.setAttribute(STATUS_INFO_FLAG, "positive");
             goJSP("/index.jsp", request, response);
         } else if(privilege.equals(User.PRIVLIEGE_ENTERPRISE)){
-            //
+            UserInfo userInfo = new UserInfo();
+            Enterprise enterprise = new Enterprise();
+            userInfo.setProperty(UserInfo.ID, EnispSession.getUserId(request));
+            userInfo = (UserInfo) mDBOperator.selectObjectFromDB(userInfo);
+            userInfo.setProperty(UserInfo.PASSWORD, password);
+            userInfo.setProperty(UserInfo.ID, EnispSession.getUserId(request));
+            enterprise.setProperty(Enterprise.ID, userInfo.getProperty(UserInfo.ENTERPRISEID));
+            enterprise = (Enterprise) mDBOperator.selectObjectFromDB(enterprise);
+            enterprise.setProperty(Enterprise.ENTERPRISENAME, request.getParameter(Enterprise.ENTERPRISENAME));
+            enterprise.setProperty(Enterprise.ADDRESS, request.getParameter(Enterprise.ADDRESS));
+            enterprise.setProperty(Enterprise.TELEPHONENUMBER, request.getParameter(Enterprise.TELEPHONENUMBER));
+            enterprise.setProperty(Enterprise.FAXNUMABER, request.getParameter(Enterprise.FAXNUMABER));
+            enterprise.setProperty(Enterprise.OFFICALWEBSITE, request.getParameter(Enterprise.OFFICALWEBSITE));
+            enterprise.setProperty(Enterprise.EMAIL, request.getParameter(Enterprise.EMAIL));
+            
+            String year = request.getParameter(UserServlet.YEAR);
+            String month = request.getParameter(UserServlet.MONTH);
+            String day = request.getParameter(UserServlet.DAY);
+
+            enterprise.setProperty(Enterprise.ESTABLISHMENTTIME, year + "-" + month + "-" + day);
+
+            mDBOperator.updateObjectToDB(userInfo);
+            mDBOperator.updateObjectToDB(enterprise);
+
+            EnispSession.invalidate(request);
+
+            status_info = "密码修改成功,请重新登录";
+            request.setAttribute(STATUS_INFO, status_info);
+            request.setAttribute(STATUS_INFO_FLAG, "positive");
+            goJSP("/index.jsp", request, response);
         } else {
             goJSP("/error.jsp", request, response);
         }

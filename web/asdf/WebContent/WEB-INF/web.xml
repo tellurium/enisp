@@ -21,6 +21,20 @@
   	<url-pattern>/UserLogin</url-pattern>
   </servlet-mapping>
 
+  <!-- 用户注销操作 -->
+  <servlet>
+  	<servlet-name>UserLogout</servlet-name>
+  	<servlet-class>cn.edu.shu.enisp.UserServlet</servlet-class>
+  	<init-param>
+  		<param-name>action</param-name>
+  		<param-value>logout</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UserLogout</servlet-name>
+  	<url-pattern>/UserLogout</url-pattern>
+  </servlet-mapping>
+  
   <!-- 普通用户注册操作 -->
   <servlet>
   	<servlet-name>RegisterNormalUser</servlet-name>

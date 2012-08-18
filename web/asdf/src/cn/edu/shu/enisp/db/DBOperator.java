@@ -232,9 +232,9 @@ public class DBOperator {
         sb.append(" set ");
         sb.append(fieldAndValueStringBuilder.toString());
         sb.append(" where ");
-        sb.append(object.ID);
+        sb.append(object.getID());
         sb.append(" = ");
-        sb.append(object.getProperty(object.ID));
+        sb.append(object.getProperty(object.getID()));
 
         System.out.println(sb.toString());
         return sb.toString();

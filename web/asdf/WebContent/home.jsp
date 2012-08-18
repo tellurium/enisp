@@ -19,20 +19,20 @@
 
                %>
                <a href="changepartner.jsp">修改伙伴信息</a> <a class="fontcolor"> | </a> 
+               <a href="uploadlogo.jsp">上传图片</a>  <a class="fontcolor"> | </a> 
                <%
                    }
                %>
-               <a href="uploadlogo.jsp">上传图片</a>  <a class="fontcolor"> | </a> 
-               <a href="logout.jsp">登出</a> 
+               <a href="UserLogout">登出</a> 
     </div>   
     <div id="graphview">     
          <a href="graphview.jsp">图形视图</a>
     </div>
     <div id="radialgraphview">
-    <a href="radialgraphview.jsp">径向图形视图</a>
+        <a href="radialgraphview.jsp">径向图形视图</a>
     </div>
     <div id ="starburst">
-    <a href="starburst.jsp">星爆图</a>
+        <a href="starburst.jsp">星爆图</a>
     </div>
 
 </body>
