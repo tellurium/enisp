@@ -66,6 +66,7 @@ public class UserServlet extends BaseServlet {
         String username = null;
         String privilege = null;
         String userid = null;
+        String enterpriseid = null;
         String password = null;
         boolean isSuccessed = false;
         // 用户分为两类:
@@ -97,6 +98,7 @@ public class UserServlet extends BaseServlet {
                     username = userinfo.getProperty(UserInfo.USERNAME);
                     privilege = User.PRIVLIEGE_ENTERPRISE;
                     userid = userinfo.getProperty(UserInfo.ID);
+                    enterpriseid = userinfo.getProperty(UserInfo.ENTERPRISEID);
                     isSuccessed = true;
                 } 
                 // Step 5: 当两张表中都没有该用户
@@ -111,6 +113,9 @@ public class UserServlet extends BaseServlet {
             EnispSession.setUsername(request, username);
             EnispSession.setPrivilege(request, privilege);
             EnispSession.setUserId(request, userid);
+            if (privilege.equals(User.PRIVLIEGE_ENTERPRISE)) {
+                EnispSession.setEnterpriseId(request, enterpriseid);
+            }
             goJSP("/home.jsp", request, response);
         } 
         else {

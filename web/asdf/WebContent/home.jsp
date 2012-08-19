@@ -18,8 +18,8 @@
                    if (privilege.equals(User.PRIVLIEGE_ENTERPRISE)) {
 
                %>
-               <a href="changepartner.jsp">修改伙伴信息</a> <a class="fontcolor"> | </a> 
-               <a href="uploadlogo.jsp">上传图片</a>  <a class="fontcolor"> | </a> 
+               <a href="ChangePartner">修改伙伴信息</a> <a class="fontcolor"> | </a> 
+               <a href="UploadLogo">上传图片</a>  <a class="fontcolor"> | </a> 
                <%
                    }
                %>

@@ -7,6 +7,7 @@ public class EnispSession {
     public static final String USERNAME = "username";
     public static final String PRIVILEGE = "privilege";
     public static final String USERID = User.ID;
+    public static final String ENTERPRISEID = "enterpriseid";
 
     public static void invalidate(HttpServletRequest request) {
         request.getSession().invalidate();
@@ -24,6 +25,13 @@ public class EnispSession {
     }
     public static String getUserId(HttpServletRequest request) {
         return (String) request.getSession().getAttribute(USERID);
+    }
+
+    public static void setEnterpriseId(HttpServletRequest request, String id) {
+        request.getSession().setAttribute(ENTERPRISEID, id);
+    }
+    public static String getEnterpriseId(HttpServletRequest request) {
+        return (String) request.getSession().getAttribute(ENTERPRISEID);
     }
 
     public static void setPrivilege(HttpServletRequest request, String privilege) {

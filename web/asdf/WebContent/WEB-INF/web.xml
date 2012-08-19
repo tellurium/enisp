@@ -91,6 +91,35 @@
   	<url-pattern>/RegisterEnterpriseUser</url-pattern>
   </servlet-mapping>
 
+  <!-- 企业用户更改合作关系操作 -->
+  <servlet>
+  	<servlet-name>ChangePartner</servlet-name>
+  	<servlet-class>cn.edu.shu.enisp.EnterpriseServlet</servlet-class>
+  	<init-param>
+  		<param-name>action</param-name>
+  		<param-value>change-partner</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ChangePartner</servlet-name>
+  	<url-pattern>/ChangePartner</url-pattern>
+  </servlet-mapping>
+
+  <!-- 企业用户更改合作关系操作 -->
+  <servlet>
+  	<servlet-name>UploadLogo</servlet-name>
+  	<servlet-class>cn.edu.shu.enisp.EnterpriseServlet</servlet-class>
+  	<init-param>
+  		<param-name>action</param-name>
+  		<param-value>upload-logo</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UploadLogo</servlet-name>
+  	<url-pattern>/UploadLogo</url-pattern>
+  </servlet-mapping>
+
+  <!-- Just for test -->
   <servlet>
   	<servlet-name>test</servlet-name>
   	<servlet-class>cn.edu.shu.enisp.TestServlet</servlet-class>
