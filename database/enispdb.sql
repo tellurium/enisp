@@ -30,7 +30,7 @@ CREATE TABLE `cooperativeenttable` (
   KEY `coentid` (`partnerid`),
   KEY `entid` (`id`),
   CONSTRAINT `entid` FOREIGN KEY (`id`) REFERENCES `enterprisetable` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +61,7 @@ CREATE TABLE `enterprisetable` (
   `officalwebsite` varchar(100) CHARACTER SET latin1 NOT NULL DEFAULT 'none',
   `logopic` varchar(100) CHARACTER SET latin1 NOT NULL DEFAULT 'none',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=gb2312;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=gb2312;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,12 +108,13 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` text,
+  `username` varchar(16) DEFAULT NULL,
   `privilege` int(11) NOT NULL,
   `password` text,
-  `time` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `status` text NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +123,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'guest',1,'123456','2012-07-08'),(2,'guest',1,'hello','2012-07-08'),(3,'hello',1,'2','2012-08-09');
+INSERT INTO `user` VALUES (1,'guest',1,'123456','active'),(2,'guest2',1,'222','active'),(3,'hello',1,'2','active'),(4,'admin',2,'123456','active'),(5,'gui',1,'gui','inactive');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,11 +139,12 @@ CREATE TABLE `userinfo` (
   `username` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
   `enterpriseid` int(11) NOT NULL,
+  `status` text NOT NULL,
   PRIMARY KEY (`userid`),
   UNIQUE KEY `enterpriseid_UNIQUE` (`enterpriseid`),
   KEY `enterpriseid` (`enterpriseid`),
   CONSTRAINT `` FOREIGN KEY (`enterpriseid`) REFERENCES `enterprisetable` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +153,7 @@ CREATE TABLE `userinfo` (
 
 LOCK TABLES `userinfo` WRITE;
 /*!40000 ALTER TABLE `userinfo` DISABLE KEYS */;
-INSERT INTO `userinfo` VALUES (1,'yestall','987987',18);
+INSERT INTO `userinfo` VALUES (1,'yestall','987987',18,'active');
 /*!40000 ALTER TABLE `userinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -164,4 +166,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-08-18 23:49:41
+-- Dump completed on 2012-09-22  9:44:43
