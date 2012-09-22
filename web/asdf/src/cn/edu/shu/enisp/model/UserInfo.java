@@ -1,5 +1,6 @@
 package cn.edu.shu.enisp.model;
 
+// 企业用户
 public class UserInfo extends BaseModel {
 	public static final String TABLENAME = "userinfo";
 	

@@ -116,7 +116,11 @@ public class UserServlet extends BaseServlet {
             if (privilege.equals(User.PRIVLIEGE_ENTERPRISE)) {
                 EnispSession.setEnterpriseId(request, enterpriseid);
             }
-            goJSP("/home.jsp", request, response);
+            if (privilege.equals(User.PRIVLIEGE_ADMIN)) {
+                goJSP("/UserAdmin", request, response);
+            } else {
+                goJSP("/home.jsp", request, response);
+            }
         } 
         else {
             request.setAttribute(STATUS_INFO, status_info);
@@ -163,9 +167,9 @@ public class UserServlet extends BaseServlet {
                 status_info = "该用户已经存在,请更换用户名";
             } else {
                 // Step 5: 信息填写成功,在数据库中插入数据
-                // 设置普通用户的创建时间和权限
-                user.setProperty(User.TIME, new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()));
+                // 设置普通用户的权限
                 user.setProperty(User.PRIVILEGE, User.PRIVILEGE_NORMAL);
+                user.setProperty(User.STATUS, User.STATUS_INACTIVE);
 
                 isSuccessed = mDBOperator.insertObjectToDB(user);
 

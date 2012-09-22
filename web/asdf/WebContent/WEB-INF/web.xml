@@ -119,6 +119,48 @@
   	<url-pattern>/UploadLogo</url-pattern>
   </servlet-mapping>
 
+  <!-- 企业用户添加一个合作伙伴操作 -->
+  <servlet>
+  	<servlet-name>AddCooperativent</servlet-name>
+  	<servlet-class>cn.edu.shu.enisp.CooperativentServlet</servlet-class>
+  	<init-param>
+  		<param-name>action</param-name>
+  		<param-value>add-coop</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AddCooperativent</servlet-name>
+  	<url-pattern>/AddCooperativent</url-pattern>
+  </servlet-mapping>
+
+  <!-- 企业用户删除一个合作伙伴操作 -->
+  <servlet>
+  	<servlet-name>DeleteCooperativent</servlet-name>
+  	<servlet-class>cn.edu.shu.enisp.CooperativentServlet</servlet-class>
+  	<init-param>
+  		<param-name>action</param-name>
+  		<param-value>delete-coop</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>DeleteCooperativent</servlet-name>
+  	<url-pattern>/DeleteCooperativent</url-pattern>
+  </servlet-mapping>
+
+  <!-- 用户管理 -->
+  <servlet>
+  	<servlet-name>UserAdmin</servlet-name>
+  	<servlet-class>cn.edu.shu.enisp.AdminServlet</servlet-class>
+  	<init-param>
+  		<param-name>action</param-name>
+  		<param-value>user-admin</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UserAdmin</servlet-name>
+  	<url-pattern>/UserAdmin</url-pattern>
+  </servlet-mapping>
+
   <!-- Just for test -->
   <servlet>
   	<servlet-name>test</servlet-name>

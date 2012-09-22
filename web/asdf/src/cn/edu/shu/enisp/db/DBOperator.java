@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -77,12 +78,76 @@ public class DBOperator {
         return executeUpdateOperation(ExecuteType.DELETE, model);
     }
 
+    public boolean executeSQL(String sql_str) {
+        boolean result = false;
+        System.out.println(sql_str);
+
+		try {
+			startDBConnection();
+			
+            if (sql_str != null) {
+                mStatement = mConnection.createStatement();
+                int row_count = mStatement.executeUpdate(sql_str);
+                if (row_count > 0) {
+                   result = true; 
+                }
+            }
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeDBConnection();
+		}
+        return result;
+
+    }
+
     public boolean updateObjectToDB(BaseModel model) {
         return executeUpdateOperation(ExecuteType.UPDATE, model);
     }
 
     public BaseModel selectObjectFromDB(BaseModel model) {
         return executeQueryOperation(ExecuteType.SELECT, model);
+    }
+
+    public List<BaseModel> selectObjectListBySQL(String sql_str, BaseModel model) {
+        System.out.println(sql_str);
+        
+        List<BaseModel> list = new ArrayList<BaseModel>();
+		try {
+			startDBConnection();
+			
+            if (sql_str != null) {
+                mStatement = mConnection.createStatement();
+                mResultSet = mStatement.executeQuery(sql_str);
+                if (mResultSet != null) {
+                    while(mResultSet.next()) {
+                        Iterator iterator = model.getIterator();
+                        model = model.getClass().newInstance();
+                        while(iterator.hasNext()) {
+                            Map.Entry entry = (Map.Entry) iterator.next();
+                            String key = (String) entry.getKey();
+                            model.setProperty(key, mResultSet.getString(key));
+                        } 
+                        String id = model.getProperty(model.getID());
+                        if (id != null && id.length() > 0 ) {
+                            list.add(model);
+                        }
+                    }
+
+                    if (list.size() > 0) {
+                        return list;
+                    }
+                }
+            }
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+			closeDBConnection();
+		}
+        return null;
     }
 
     public boolean executeUpdateOperation(ExecuteType type, BaseModel model) {

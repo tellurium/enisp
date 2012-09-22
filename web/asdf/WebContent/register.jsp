@@ -34,7 +34,7 @@ import="cn.edu.shu.enisp.factory.Factory"
     }
     %>
     <form name="form2" method="post" action="RegisterNormalUser">
-        <h2>普通用户</h2>
+        <h2>政府用户</h2>
         <div id="status-info"><p><%= status_info_1 %></p></div>
         <table>
             <tr>
@@ -50,7 +50,7 @@ import="cn.edu.shu.enisp.factory.Factory"
                 <td><input type="password"  class="form-login" name="confirm_password"></td>
             </tr>
             <tr>
-                <td><input type="reset" class="normal-button" name="reset" id="reset" value="Reset">
+                <td><input type="button" class="normal-button" name="back" id="reset" value="Back" onClick="history.back()"></td>
                     <td><input type="submit" class="normal-button" name="button" id="submit" value="Create"></td>
             </tr>
         </table>
@@ -124,7 +124,9 @@ import="cn.edu.shu.enisp.factory.Factory"
                 <label>日</label></td>
             </tr>
             <tr>
-                <td><input type="reset" class="normal-button" name="reset" id="reset" value="Reset">
+                <td>
+                    <input type="button" class="normal-button" name="back" id="reset" value="Back" onClick="history.back()">
+                </td>
                     <td><input type="submit" class="normal-button" name="button" id="submit" value="Create"></td>
             </tr>
         </table>
